@@ -44,10 +44,10 @@ class AdminPlusMixin(object):
     def get_urls(self):
         """Add our custom views to the admin urlconf."""
         urls = super(AdminPlusMixin, self).get_urls()
-        from django.conf.urls import url
+        from django.urls import path as django_path
         for path, view, name, urlname, visible in self.custom_views:
             urls = [
-                url(r'^%s$' % path, self.admin_view(view), name=urlname),
+                django_path(path, self.admin_view(view), name=urlname),
             ] + urls
         return urls
 
